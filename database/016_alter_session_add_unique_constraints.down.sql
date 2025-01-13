@@ -1,0 +1,2 @@
+ALTER TABLE session
+DROP CONSTRAINT unique_tutor_session_time;

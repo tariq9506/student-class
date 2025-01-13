@@ -1,0 +1,1 @@
+DROP table user2zoho_leads;

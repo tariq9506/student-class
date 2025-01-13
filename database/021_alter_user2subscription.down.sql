@@ -1,0 +1,2 @@
+ALTER TABLE user2subscription DROP COLUMN
+start_date TIMESTAMP WITH TIME ZONE;

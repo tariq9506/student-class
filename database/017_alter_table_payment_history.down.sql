@@ -1,0 +1,7 @@
+ALTER TABLE payment_history
+DROP COLUMN card_last4 VARCHAR(5),
+DROP COLUMN payment_type VARCHAR(10),
+DROP COLUMN brand VARCHAR(20),
+DROP COLUMN exp_year VARCHAR(5),
+DROP COLUMN exp_month VARCHAR(2),
+DROP COLUMN billing_address TEXT;

@@ -1,0 +1,2 @@
+ALTER TABLE session_feedback
+ADD CONSTRAINT session_feedback_session_id_unique UNIQUE (session_id);

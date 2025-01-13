@@ -1,0 +1,1 @@
+ALTER TABLE public.subscription_plan DROP COLUMN status;

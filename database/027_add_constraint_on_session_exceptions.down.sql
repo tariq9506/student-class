@@ -1,0 +1,2 @@
+ALTER TABLE session_exceptions
+DROP CONSTRAINT session_exceptions_status_check;

@@ -1,0 +1,1 @@
+ALTER Table public.user2subscription add COLUMN price_id bigint;

@@ -1,0 +1,1 @@
+ALTER Table public.user2subscription DROP COLUMN price_id;

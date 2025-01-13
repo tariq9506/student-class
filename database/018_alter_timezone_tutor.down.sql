@@ -1,0 +1,1 @@
+ALTER TABLE tutor ALTER COLUMN timezone TYPE varchar(10);

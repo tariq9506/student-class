@@ -1,0 +1,2 @@
+ALTER TABLE session_exceptions
+DROP CONSTRAINT unique_session_time_tutor_id;

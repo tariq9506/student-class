@@ -1,0 +1,2 @@
+ALTER TABLE session_feedback
+DROP CONSTRAINT IF EXISTS session_feedback_session_id_unique;

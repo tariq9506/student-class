@@ -1,0 +1,1 @@
+DROP TABLE public.tutor_subject_grade;

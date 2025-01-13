@@ -1,0 +1,563 @@
+basePath: /api
+info:
+  contact: {}
+  description: This is swagger api for Tutree.
+  title: Tutree Swagger API
+  version: "2.0"
+paths:
+  /ambassador/authenticate:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        The AmbassadorRegistration function handles the process of signing up
+        students on a website. It expects the ambassador to submit their phone number through a form.
+      parameters:
+      - description: Phone
+        in: formData
+        name: phone-number
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller will handles the registration process for ambassador.
+      tags:
+      - PhoneVerification
+  /ambassador/stats:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        The GetAmbassadorStats api handles the process of fetching up
+        the statistics details of an ambassador based on thier user-id.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This API is used to fetch ambassador statistics.
+      tags:
+      - Ambassador
+  /logout:
+    delete:
+      consumes:
+      - application/x-www-from-urlencoded
+      description: This fuctionality is used for user logout action.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: User logout process by invalidating the user's active session
+      tags:
+      - user
+  /metadata/grades:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: This API is designed to fetch all the grades of students.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This API will use to fetch grades.
+      tags:
+      - Metadata
+  /metadata/subjects:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: This API is designed to fetch all the subjects offered by tutree
+        to students.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This API will use to fetch subjects.
+      tags:
+      - Metadata
+  /otp/send:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This controller will resend the OTP.
+        This api is taking phone number as postform and user ip from header.
+      parameters:
+      - description: Phone Number
+        in: formData
+        name: phone-number
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller will resend the given code same as OTP.
+      tags:
+      - PhoneVerification
+  /otp/verify:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This controller will verify the given code same as OTP. It will also check if OTP is expired.
+        This api is taking code and studentId as postform
+      parameters:
+      - description: Code
+        in: formData
+        name: code
+        required: true
+        type: string
+      - description: user-id
+        in: formData
+        name: user-id
+        required: true
+        type: string
+      - description: User Agent
+        in: header
+        name: User-Agent
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller will verify the given code same as OTP. It will also
+        check if OTP is expired
+      tags:
+      - PhoneVerification
+  /session:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Function provide a feature to delete a student's session by validating
+        the authorization token,
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Session ID
+        in: formData
+        name: session-id
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This function handles to delete a session of a students by session
+        id.
+      tags:
+      - Session
+  /session/book-demo:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This controller will book the demo session for student.
+        This api is taking student name, parent's email, grade and session date time as postform.
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Session Datetime
+        in: formData
+        name: session-datetime
+        required: true
+        type: string
+      - description: Student Name
+        in: formData
+        name: student-name
+        required: true
+        type: string
+      - description: Student Grade
+        in: formData
+        name: grade
+        required: true
+        type: string
+      - description: parent's Email`
+        in: formData
+        name: parent-email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller funnction handles the booking of a demo session for
+        a student
+      tags:
+      - DemoSessionBooking
+  /session/demo-reschedule:
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        function reschedules a student's demo session by validating the authorization token,
+        converting session details, finding an available tutor, updating the session, and responding with a success message
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Session Datetime
+        in: formData
+        name: session-datetime
+        required: true
+        type: string
+      - description: Session ID
+        in: formData
+        name: session-id
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This function handles the rescheduling of a demo session for a students.
+      tags:
+      - Session
+  /session/pending-book:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Function provide a feature to list the pending classes by validating
+        the authorization token,
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This function give the pending classes of a students which he want
+        to reschedule later.
+      tags:
+      - Session
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This controller will book the pending session for student.
+        This api is taking student session date time,timezone and tutor id as postform.
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Session Datetime
+        in: formData
+        name: session-datetime
+        required: true
+        type: string
+      - description: Time Zone
+        in: formData
+        name: timezone
+        required: true
+        type: string
+      - description: Tutor ID
+        in: formData
+        name: tutor_id
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller function handles the booking of a pending session for
+        a student
+      tags:
+      - DemoSessionBooking
+  /session/reschedule-later:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        Function provide a feature to reschedules later  a student's paid session by validating the authorization token,
+        session id, and delete old record of that session.
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Session ID
+        in: formData
+        name: session_id
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This function handles the rescheduling session in later of a paid session
+        for a students.
+      tags:
+      - Session
+  /session/student/profile:
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This function handles the process of updating a student's profile information. It retrieves the student's
+        current profile details, processes updates to fields such as name, grade, parent's email, school ID, profile picture,
+        and parent's name, and then saves these updates.
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Grade
+        in: formData
+        name: grade
+        type: string
+      - description: Parent's Email
+        in: formData
+        name: parent_email
+        type: string
+      - description: Student Name
+        in: formData
+        name: student_name
+        type: string
+      - description: Parent's Name
+        in: formData
+        name: parent_name
+        type: string
+      - description: School ID
+        in: formData
+        name: school_id
+        type: string
+      - description: Student Picture
+        in: formData
+        name: student_picture
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This function handles the process of updating a student's profile information.
+      tags:
+      - Student
+  /student/authenticate:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        The StudentRegistration function handles the process of signing up
+        students on a website. It expects the student to submit their phone number through a form.
+      parameters:
+      - description: Phone
+        in: formData
+        name: phone-number
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller will handles the registration process for students.
+      tags:
+      - PhoneVerification
+  /student/profile:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This function retrieves the student's profile based on the provided Authorization token and
+        fetches the student's demo session details. It responds with a JSON object containing the student's information
+        and demo session details.
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller will handles to fetch profile of students.
+      tags:
+      - Student
+  /tutor/slots:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This function retrieves the available time slots for a tutor within a specified date range so that student can
+        book demo session with available tutor.
+      parameters:
+      - description: Start Date
+        in: query
+        name: start_date
+        required: true
+        type: string
+      - description: End Date
+        in: query
+        name: end_date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This function retrieves the available time slots for a tutor within
+        a specified date range.
+      tags:
+      - Tutor
+  /user/child:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: This controller will fetch all child for user.
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller function handles the listing of children for user.
+      tags:
+      - User
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        This controller will add a chiled for user.
+        This api is taking student name, parent's email, grade as postform.
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Student Name
+        in: formData
+        name: student-name
+        required: true
+        type: string
+      - description: Student Grade
+        in: formData
+        name: grade
+        required: true
+        type: string
+      - description: parent's Email`
+        in: formData
+        name: parent-email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller function handles the adding a child for user.
+      tags:
+      - User
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: This controller will update given child details.
+      parameters:
+      - description: Authorization token (Bearer token)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Grade ID
+        in: formData
+        name: grade_id
+        type: number
+      - description: Parent's Email
+        in: formData
+        name: parent-email
+        type: string
+      - description: Child Name
+        in: formData
+        name: student-name
+        type: string
+      - description: Child ID
+        in: formData
+        name: child_id
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This controller function handles the updatation of child details.
+      tags:
+      - User
+  /v1/session/list:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: This function retrieve a list of tutor sessions based on query
+        parameters(If not provided then it will all list).
+      parameters:
+      - description: start-date
+        in: query
+        name: date-from
+        type: string
+      - description: end-date
+        in: query
+        name: date-to
+        type: string
+      - description: session-type
+        in: query
+        name: session-type
+        type: string
+      - description: session-status
+        in: query
+        name: status
+        type: string
+      - description: tutor-id
+        in: query
+        name: tutor-id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: This Api will retrieve session list.
+      tags:
+      - Tutor
+schemes:
+- http
+- https
+swagger: "2.0"
